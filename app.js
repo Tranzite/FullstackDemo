@@ -14,13 +14,13 @@ app.set("view engine","ejs");
 
 app.get("/", (req, res) => res.sendFile(staticDir + "pages\\index.html"));
 
-app.get('/messages', async (req, res) => {
+app.get('/messages', async (req, res) => { // inväntar messages och låter den skapa om variabeln (let) och sedan inväntar den på medeladet och sedan visar alla
   let messages = await messageModel.getAllMessages()
   res.render("views/forums.ejs", { names: messages})
 })
 
 
-app.get("/forum", async (req, res) =>{
+app.get("/forum", async (req, res) =>{ // skapar variabeln för messages och lägger in det vi skickar in till databasen i variabeln
 
   const messages = await messageModel.getAllMessage()
 
@@ -28,7 +28,7 @@ app.get("/forum", async (req, res) =>{
   }
   // I'll probably need to use this bit of code below to show the message on screen, this is an old assignemnt.
 );
-app.post('/forum', async (req, res) => {
+app.post('/forum', async (req, res) => { // skapar själva medelandet som kräver user input från hemsidan och sedan lägger det i en const
 
   const message = await messageModel.createMessage(req.body.fname, req.body.forumMessage)
 
@@ -48,42 +48,3 @@ app.get("/services", (req, res) =>
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
-
-/*
-app.get('/', (req, res) => {
-  res.render('pages/index.ejs', { name: " " })
-})
-
-app.get("/messages", (req, res) => res.render("messages.ejs"));
-
-
-app.get('/messages', async (req, res) => {
-  let messages = await messageModel.getAllMessages()
-  res.render("pages/messages.ejs", { names: messages})
-})
-
-
-
-app.post('/messages', (req, res) => {
-  let message = messageModel.createMessage(req.body.name, req.body.message)
-
-  dBModule.storeElement(message)
-
-  res.render('pages/messages.ejs', { name: req.body.name})
-})
-
-app.post('/', (req, res) => {
-
-  let person = personModel.createPerson(req.body.name, req.body.email, req.body.age)
-
-  dBModule.storeElement(person)
-
-  let displayName = " " + req.body.name
-
-  res.render('pages/index.ejs', { name: req.body.name }) // detta är istället för res.send
-})
-
-app.listen(port, () => {
-  console.log(`Example app listening on ports ${port}!`)
-})
-*/
