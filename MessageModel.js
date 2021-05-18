@@ -15,7 +15,7 @@ exports.createMessage = (name, message) => {
         
        })
 
-       return person
+       return message
 }
 exports.getAllMessage = async () => {
     let message = await Message.find({})

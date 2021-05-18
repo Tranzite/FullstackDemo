@@ -14,43 +14,27 @@ app.set("view engine","ejs");
 
 app.get("/", (req, res) => res.sendFile(staticDir + "pages\\index.html"));
 
-
-//
-app.get("/messages", (req, res) => res.render("forum.ejs"));
-
 app.get('/messages', async (req, res) => {
   let messages = await messageModel.getAllMessages()
   res.render("views/forums.ejs", { names: messages})
 })
 
 
-app.post('/messages', (req, res) => {
-  let message = messageModel.createMessage(req.body.fname, req.body.forumMessage)
+app.get("/forum", async (req, res) =>{
 
-  dBModule.storeElement(message)
+  const messages = await messageModel.getAllMessage()
 
-  res.render('pages/forums.ejs', { name: req.body.fname})
-})
-//
-
-
-
-app.get("/forum", (req, res) =>
-  res.render("./forum.ejs", {
-    
-    name: "Name",
-    forumMessage: "Message"
-  })
-
+  res.render('./forum.ejs', { messages: messages.reverse() }) // detta är istället för res.send
+  }
   // I'll probably need to use this bit of code below to show the message on screen, this is an old assignemnt.
 );
-app.post('/forum', (req, res) => {
+app.post('/forum', async (req, res) => {
 
-  let person = personModel.createPerson(req.body.fname, req.body.forumMessage)
+  const message = await messageModel.createMessage(req.body.fname, req.body.forumMessage)
 
-  dBModule.storeElement(person)
+  await dBModule.storeElement(message)
 
-  res.render('pages/index.ejs', { name: req.body.fname, message: req.body.forumMessage }) // detta är istället för res.send
+  res.redirect('/forum')
 })
 
 
@@ -61,19 +45,6 @@ app.get("/anime", (req, res) =>
 app.get("/services", (req, res) =>
   res.sendFile(staticDir + "pages\\services.html")
 );
-
-
-
-app.post("/contact", function (req, res) {
-  console.log(req.body.fname);
-  console.log(req.body.forumMessage);
-  
-});
-
-
-
-
-
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
