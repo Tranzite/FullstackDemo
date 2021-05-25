@@ -1,7 +1,9 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
 const dBModule = require('./dBModule') //
 const personModel = require('./PersonModel')
-const messageModel = require('./MessageModel') //
+const messageModel = require('./MessageModel') 
+const UserModel = require("./UserModel");
 const app = express();
 const port = 3000;
 
@@ -45,6 +47,30 @@ app.get("/anime", (req, res) =>
 app.get("/services", (req, res) =>
   res.sendFile(staticDir + "pages\\services.html")
 );
+app.post("/registerUser", async (req,res) => {
+  const hashedPassword = await bcrypt.hash(req.body.password, 10)
+  UserModel.saveUser(req.body.email, );
+  res.redirect("/forum");
+});
+
+app.post("/login", async (req,res) => {
+  const user = await UserModel.getUser(req.body.email);
+  await bcrypt.compare(req.body.password, user.password, (err, success) =>{
+    if(err){
+      console.log(err);
+    }
+    
+    if(success) console.log("Success");
+    else console.log("Fail");
+
+  });
+  if (req.body.password === user.password)
+   console.log("Success");
+  else
+   console.log("Fail")
+
+  res.redirect("/forum");
+});
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 

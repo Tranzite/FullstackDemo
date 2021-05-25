@@ -45,6 +45,26 @@
         <input type="forumMmessage" name="forumMessage">
         <button type="submit">Click here to send!</button>
     </form>
+    <form action="/registerUser" method="post">
+      <div class="form-group">
+        <label for="email">Användernamn:</label>
+        <input type="email" name="email" id="email">
+        <label for="password">lösenord:</label>
+        <input type="password" name="password" id="password">
+      </div>
+      <button type="submit" class="btn btn-dark"> Register</button>
+    </form>
+
+    <form action="/login" method="post">
+      <div class="form-group">
+        <label for="email">Användernamn:</label>
+        <input type="email" name="email" id="email">
+        <label for="password">lösenord:</label>
+        <input type="password" name="password" id="password">
+      </div>
+      <button type="submit" class="btn btn-dark"> Login</button>
+    </form>
+
 
     <div id="textbox"> <!-- For this to work I believe I need to create a list and import the list into this section, however I'm not sure how to achieve this-->
         
