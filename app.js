@@ -1,6 +1,6 @@
 const express = require("express");
 const bcrypt = require("bcryptjs");
-const dBModule = require('./dBModule') //
+const dBModule = require('./dBModule') 
 const personModel = require('./PersonModel')
 const messageModel = require('./MessageModel') 
 const UserModel = require("./UserModel");
@@ -28,7 +28,7 @@ app.get("/forum", async (req, res) =>{ // skapar variabeln för messages och lä
 
   res.render('./forum.ejs', { messages: messages.reverse() }) // detta är istället för res.send
   }
-  // I'll probably need to use this bit of code below to show the message on screen, this is an old assignemnt.
+ 
 );
 app.post('/forum', async (req, res) => { // skapar själva medelandet som kräver user input från hemsidan och sedan lägger det i en const
 
@@ -47,13 +47,13 @@ app.get("/anime", (req, res) =>
 app.get("/services", (req, res) =>
   res.sendFile(staticDir + "pages\\services.html")
 );
-app.post("/registerUser", async (req,res) => {
+app.post("/registerUser", async (req,res) => { // hashed is a bcrypt variable that helps you encrypt important things like passwords which is done here
   const hashedPassword = await bcrypt.hash(req.body.password, 10)
   UserModel.saveUser(req.body.email, );
   res.redirect("/forum");
 });
 
-app.post("/login", async (req,res) => {
+app.post("/login", async (req,res) => { // Checks if the password matches the "userpassword" which if it does it will say success otherwise it will say Fail
   const user = await UserModel.getUser(req.body.email);
   await bcrypt.compare(req.body.password, user.password, (err, success) =>{
     if(err){
@@ -63,11 +63,12 @@ app.post("/login", async (req,res) => {
     if(success) console.log("Success");
     else console.log("Fail");
 
+    
+    if (req.body.password === user.password)
+    console.log("Success");
+   else
+    console.log("Fail")
   });
-  if (req.body.password === user.password)
-   console.log("Success");
-  else
-   console.log("Fail")
 
   res.redirect("/forum");
 });
