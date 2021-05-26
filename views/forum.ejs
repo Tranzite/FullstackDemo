@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/client/js/bootstrap.js">
     <link rel="stylesheet" href="/client/css/styles.css">
     <link rel="stylesheet" href="/client/js/scripts.js">
-
+    <link rel="stylesheet" href="/client/css/style.css">
 </head>
 
 
@@ -36,40 +36,43 @@
         </li>
       </ul>
     </nav>
+<div id="main">
+<div id="forms">
+    <form action="/registerUser" method="post">
+      
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password">
+    
+    <button type="submit" class="btn btn-dark"> Register</button>
+  </form>
 
+  <form action="/login" method="post">
+    
+      <label for="email">Email:</label>
+      <input type="email" name="email" id="email">
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password">
+    
+    <button type="submit" class="btn btn-dark"> Login</button>
+  </form>
 
+</div>
+<div id="formMessage">
     <form action="/forum" method="post"><!-- A simple form -->
         <label for="fname">Name:</label>
         <input type="fname" name="fname">
         <label for="forumMessage">Message:</label>
-        <input type="forumMmessage" name="forumMessage">
+        <input type="forumMessage" name="forumMessage">
         <button type="submit">Click here to send!</button>
     </form>
-
-    <form action="/registerUser" method="post">
-      <div class="form-group">
-        <label for="email">Användernamn:</label>
-        <input type="email" name="email" id="email">
-        <label for="password">lösenord:</label>
-        <input type="password" name="password" id="password">
-      </div>
-      <button type="submit" class="btn btn-dark"> Register</button>
-    </form>
-
-    <form action="/login" method="post">
-      <div class="form-group">
-        <label for="email">Användernamn:</label>
-        <input type="email" name="email" id="email">
-        <label for="password">lösenord:</label>
-        <input type="password" name="password" id="password">
-      </div>
-      <button type="submit" class="btn btn-dark"> Login</button>
-    </form>
+  </div>
 
 
-    <div id="textbox"> <!-- For this to work I believe I need to create a list and import the list into this section, however I'm not sure how to achieve this-->
-        
 
+    <div id="textbox"> 
+  
       <% for( let i = 0; i < messages.length; i++ ) { %> <!-- This loop creates a card and holds the users message and name everytime someone clicks the send button-->
         <div class="inner-main-body p-2 p-sm-3 collapse forum-content show">
           <div class="card mb-2 ">
@@ -93,6 +96,7 @@
       <% } %>
           
       
+  </div>
   </div>
 
     <footer class="center-text navbar fixed-bottom bg-dark" style="margin-bottom:0">

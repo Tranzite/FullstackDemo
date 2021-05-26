@@ -49,13 +49,16 @@ app.get("/services", (req, res) =>
 );
 app.post("/registerUser", async (req,res) => { // hashed is a bcrypt variable that helps you encrypt important things like passwords which is done here
   const hashedPassword = await bcrypt.hash(req.body.password, 10)
-  UserModel.saveUser(req.body.email, );
+  console.log(hashedPassword)
+  UserModel.saveUser(req.body.email, hashedPassword );
+
   res.redirect("/forum");
 });
 
 app.post("/login", async (req,res) => { // Checks if the password matches the "userpassword" which if it does it will say success otherwise it will say Fail
   const user = await UserModel.getUser(req.body.email);
   await bcrypt.compare(req.body.password, user.password, (err, success) =>{
+    console.log(user);
     if(err){
       console.log(err);
     }
@@ -63,11 +66,6 @@ app.post("/login", async (req,res) => { // Checks if the password matches the "u
     if(success) console.log("Success");
     else console.log("Fail");
 
-    
-    if (req.body.password === user.password)
-    console.log("Success");
-   else
-    console.log("Fail")
   });
 
   res.redirect("/forum");

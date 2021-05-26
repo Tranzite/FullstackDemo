@@ -20,4 +20,4 @@ exports.createMessage = (name, message) => {
 exports.getAllMessage = async () => {
     let message = await Message.find({})
     return message
-}
+} 

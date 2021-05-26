@@ -1,0 +1,26 @@
+
+
+input {
+    margin:5px;
+  }
+  input[type=email]:focus {
+    background-color: lightblue;
+  }
+  input[type=forumMessage]:focus {
+    background-color: lightblue;
+  }
+  input[type=forumMessage] {
+    width: 20%;
+  }
+  input[type=fname]:focus {
+    background-color: lightblue;
+  }
+  #forms{
+    background: lightgray;
+    width: 100%;
+  }
+  #formMessage{
+    margin-left: 20px;
+    margin-top: 60px;
+  }
+  
